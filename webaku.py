@@ -1,44 +1,56 @@
 import streamlit as st
-st.sidebar.title(" Navigasi")
-menu = st.sidebar.selectbox("Pilih Halaman:", ["Profil Singkat", "Hubungi Saya"])
-if menu == "Profil Singkat":
-    st.title("Web Biodata Saya")
-    st.write("Selamat datang di website profil saya!")
-    # --- Kode untuk menampilkan foto profil ---
-    # tamppilan foto profil
-    st.image("foto_profil.jpeg", width=250)
+import pandas as pd
 
-    st.divider()
+st.set_page_config(page_title="Biodata Anastasia", layout="wide")
 
-    # Membuat sub-judul
-    st.header(" Profil Singkat")
-    
-    # Menampilkan informasi biodata
-    st.write("**Nama Lengkap:** Anastasia Chalarita Lodang")
-    st.write("**Jurusan:** Teknik Informatika")
-    st.write("**Universitas:** Universitas Nusa Putra")
+st.title("Web Biodata Profesional")
 
-    st.divider()
-elif menu == "Hubungi Saya":
-    st.header("Hubungi Saya")
-    kolom1, kolom2 = st.columns(2)
+# 1. Menggunakan Layout Columns
+col1, col2 = st.columns([1, 2])
 
-    with kolom1:
-        st.write("*Email:* anastasia.caralita_ti25@nusaputra.ac.id")
-    with kolom2:
-        st.write("*GitHub:* github.com/anastasiacaralita")
+with col1:
+    # Asumsikan foto sudah di-upload di GitHub
+    st.image("foto_profil.jpeg", caption="Anastasia Chalarita Lodang", width=250)
 
-    #st.title("Hubungi Saya")
-    st.divider()
+with col2:
+    st.header("Profil Singkat")
+    st.write("Mahasiswa Teknik Informatika yang tertarik pada pengembangan web dan algoritma.")
+    st.info("Saat ini sedang mendalami Python dan Streamlit.")
 
-    st.subheader("Kirim pesan interaktif")
-    nama = st.text_input("nama anda:")
-    pesan = st.text_area("pesan anda")
+st.divider()
 
-    if st.button("kirim pesan"):
-        if nama and pesan:
-            st.success(f"Terkirim! Terima kasih {nama}, pesan anda berhasil diproses")
-        else:
-            st.warning("mohon isi nama dan pesan anda terlebih dahulu ya besti!")
+# 2. Menggunakan Looping untuk Daftar Keahlian
+st.subheader("Keahlian Pemrograman")
+# 2. Struktur Data & Looping (Menunjukkan kemampuan logika)
+st.subheader("Peta Pembelajaran Saya")
+skills = {
+    "Python": 70,      # Sedang dalam proses belajar intensif
+    "HTML/CSS": 40,    # Dasar-dasar web
+    "Java": 30,        # Baru mulai mengenal
+    "SQL": 20          # Dasar basis data
+}
 
+# Menampilkan dengan Progress Bar
+for skill, level in skills.items():
+    st.write(f"*{skill}*")
+    st.progress(level / 100)
 
+# Menampilkan dengan Progress Bar (Looping)
+for skill, level in skills.items():
+    st.write(f"*{skill}*")
+    st.progress(level / 100)
+
+# 3. Menambahkan Visualisasi Data (Grafik)
+st.subheader("Statistik Penguasaan Skill")
+chart_data = pd.DataFrame.from_dict(skills, orient='index', columns=['Persentase'])
+st.bar_chart(chart_data)
+
+# 4. Form Kontak (Interaktivitas)
+st.divider()
+st.subheader("Hubungi Saya")
+with st.form("contact_form"):
+    email = st.text_input("Email Anda")
+    pesan = st.text_area("Pesan untuk saya")
+    submit = st.form_submit_button("Kirim")
+    if submit:
+        st.success(f"Terima kasih {email}, pesan telah diterima!")
