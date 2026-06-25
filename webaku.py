@@ -36,6 +36,11 @@ st.subheader("Statistik Penguasaan Skill")
 chart_data = pd.DataFrame.from_dict(skills, orient='index', columns=['Persentase'])
 st.bar_chart(chart_data)
 
+st.subheader("Kejutan Kecil")
+if st.button("Klik untuk Kejutan!"):
+    st.balloons()
+    st.success("Terima kasih sudah berkunjung!")
+
 st.divider()
 st.subheader("Hubungi Saya")
 st.write("Silakan hubungi saya melalui:")
