@@ -38,4 +38,7 @@ st.bar_chart(chart_data)
 
 st.divider()
 st.subheader("Hubungi Saya")
+st.write("Silakan hubungi saya melalui:")
+st.write("- *Email:* [Masukkan email kamu di sini]")
+st.write("- *GitHub:* [github.com/anastasiacaralitati25-dot](https://github.com/anastasiacaralitati25-dot)")
 
